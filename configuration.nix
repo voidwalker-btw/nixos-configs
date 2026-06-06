@@ -1,0 +1,101 @@
+
+{ config, lib, pkgs, ... }:
+
+{
+  imports =
+    [ 
+      ./hardware-configuration.nix
+    ];
+
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  networking.hostName = "nix-btw"; # Define your hostname.
+
+  networking.networkmanager.enable = true;
+
+  time.timeZone = "Asia/Yekaterinburg";
+  # services.pulseaudio.enable = true;
+  # services.pipewire = {
+  #   enable = true;
+  #   pulse.enable = true;
+  # };
+  users.users.voidwalker = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "audio" "video" "input" ]; 
+    packages = with pkgs; [
+      tree
+    ];
+  };
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  documentation.man.enable = true;
+  documentation.dev.enable = true;
+
+   nix.settings = {
+    substituters = [
+      "https://mirror.yandex.ru/nixos/cache.nixos.org"
+      "https://cache.nixos.org"
+    ];
+  };  
+
+  services.displayManager.ly.enable = true;
+  
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true;
+  };
+
+  environment.systemPackages = with pkgs; [
+    wget
+    neovim
+    wofi
+    alacritty
+    fd
+    ripgrep
+    curl
+    fzf
+    waybar
+    swaybg
+    wl-clipboard
+    git
+    home-manager
+    nur.repos.trev.helium
+    papirus-icon-theme
+    swaylock
+    swayidle
+  ];
+
+    programs.hyprland = {
+      enable = true;
+      withUWSM = true;
+  };
+
+  security.pam.services.swaylock = {};
+
+  # services.greetd = {
+  #   enable = true;
+  #   settings = {
+  #     default_session = {
+  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
+  #       user = "greeter";
+  #     };
+  #   };
+  # };
+
+  programs.nix-ld.enable = true;
+
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.iosevka
+    nerd-fonts.jetbrains-mono
+  ];
+
+  # system.copySystemConfiguration = true;
+
+  system.stateVersion = "26.05";
+
+}
+
