@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nur.url = "github:nix-community/NUR";
+    mangowm = {
+      url = "github:mangowm/mango";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };  
     
 
     home-manager = {
@@ -12,12 +16,13 @@
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, nur, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nur, mangowm, ... }@inputs: {
     nixosConfigurations.nix-btw = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         ./configuration.nix
         ./hardware-configuration.nix
+	mangowm.nixosModules.mango
       { 
         nixpkgs.overlays = [
           nur.overlays.default
@@ -63,12 +68,12 @@
           };
       
 
-          xdg.configFile."hypr/hyprland.conf" = {
-            source = config.lib.file.mkOutOfStoreSymlink "/home/voidwalker/.config/hypr/hyprland.conf";
+          xdg.configFile."wofi/style.css" = {
+            source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/nixos-configs/wofi/style.css";
           };
 
-          xdg.configFile."wofi/style.css" = {
-            source = config.lib.file.mkOutOfStoreSymlink "/home/voidwalker/.config/wofi/style.css";
+          xdg.configFile."wofi/config" = {
+            source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/nixos-configs/wofi/config";
           };
 
           home.pointerCursor = {

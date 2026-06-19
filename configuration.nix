@@ -17,11 +17,7 @@
   networking.networkmanager.enable = true;
 
   time.timeZone = "Asia/Yekaterinburg";
-  # services.pulseaudio.enable = true;
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
+ 
   users.users.voidwalker = {
     isNormalUser = true;
     extraGroups = [ "wheel" "audio" "video" "input" ]; 
@@ -68,24 +64,11 @@
     swayidle
   ];
 
-    programs.hyprland = {
-      enable = true;
-      withUWSM = true;
-  };
-
   security.pam.services.swaylock = {};
 
-  # services.greetd = {
-  #   enable = true;
-  #   settings = {
-  #     default_session = {
-  #       command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --cmd Hyprland";
-  #       user = "greeter";
-  #     };
-  #   };
-  # };
-
   programs.nix-ld.enable = true;
+
+  programs.mango.enable = true;
 
 
   fonts.packages = with pkgs; [
