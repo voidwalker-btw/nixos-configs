@@ -68,14 +68,6 @@
           };
       
 
-          xdg.configFile."wofi/style.css" = {
-            source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/nixos-configs/wofi/style.css";
-          };
-
-          xdg.configFile."wofi/config" = {
-            source = config.lib.file.mkOutOfStoreSymlink "/etc/nixos/nixos-configs/wofi/config";
-          };
-
           home.pointerCursor = {
             name = "Bibata-Modern-Classic";
             package = pkgs.bibata-cursors;
