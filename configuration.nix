@@ -51,10 +51,10 @@
     wl-clipboard
     git
     home-manager
-    nur.repos.trev.helium
     papirus-icon-theme
     swaylock
     swayidle
+    firefox
   ];
 
   security.pam.services.swaylock = {};
