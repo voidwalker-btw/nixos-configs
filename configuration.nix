@@ -28,14 +28,7 @@
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   documentation.man.enable = true;
-  documentation.dev.enable = true;
-
-   nix.settings = {
-    substituters = [
-      "https://mirror.yandex.ru/nixos/cache.nixos.org"
-      "https://cache.nixos.org"
-    ];
-  };  
+  documentation.dev.enable = true; 
 
   services.displayManager.ly.enable = true;
   
