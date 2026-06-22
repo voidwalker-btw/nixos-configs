@@ -41,7 +41,6 @@
             home-manager
             btop
             fastfetch
-            waybar
             pavucontrol
             nix-search-tv
             dysk
@@ -49,22 +48,43 @@
             unzip
             eza
             bat
-            nerdfetch
             nixd 
             alejandra
             yazi
             nix-search-cli
             jq
             asciiquarium
-            pcmanfm
-            cmatrix
+            thunar
             pfetch
+            gnome-themes-extra
+            adwaita-icon-theme
           ];
+
+          gtk = {
+            enable = true;
+            theme = {
+              name = "Adwaita-dark";
+              package = pkgs.gnome-themes-extra;
+            };
+            iconTheme = {
+              name = "Adwaita";
+              package = pkgs.adwaita-icon-theme;
+            };
+
+            gtk3.extraConfig = {
+              gtk-application-prefer-dark-theme = 1;
+            };
+
+            gtk4.extraConfig = {
+              gtk-application-prefer-dark-theme = 1;
+            };
+          };  
 
           home.sessionVariables = {
             EDITOR = "nvim";
-            BROWSER = "brave";
+            BROWSER = "firefox";
             QT_QPA_PLATFORM = "wayland";
+            GTK_THEME = "Adwaita-dark";
           };
       
 

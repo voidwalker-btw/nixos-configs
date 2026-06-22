@@ -37,6 +37,8 @@
     powerOnBoot = true;
   };
 
+  programs.dconf.enable = true;
+
   environment.systemPackages = with pkgs; [
     wget
     neovim
@@ -46,7 +48,6 @@
     ripgrep
     curl
     fzf
-    waybar
     swaybg
     wl-clipboard
     git
@@ -55,6 +56,7 @@
     swaylock
     swayidle
     firefox
+    waybar
   ];
 
   security.pam.services.swaylock = {};
